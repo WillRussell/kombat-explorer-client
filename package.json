@@ -22,7 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext .js --ext .jsx ."
+    "lint": "eslint --ext .js --ext .jsx .",
+    "deploy": "aws s3 sync build/ s3://react-material-starter --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
