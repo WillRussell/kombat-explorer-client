@@ -13,21 +13,42 @@ function Home() {
     <div className={classes.root}>
 
       <Typography
-        gutterBottom
-        variant="h1"
+        className={classes.title}
+        component="h1"
+        variant="h3"
       >
         Hello World
       </Typography>
 
-      <Button
-        color="primary"
-        component={RouterLink('/about')}
-        endIcon={<ArrowForward />}
-        size="large"
-        variant="outlined"
+      <Typography
+        className={classes.subtitle}
+        color="textSecondary"
+        variant="caption"
       >
-        More Info
-      </Button>
+        A web app to bootstrap your next React + Material-UI project!
+      </Typography>
+
+      <div>
+        <Button
+          className={classes.buttonLink}
+          color="primary"
+          href="https://github.com/WillRussell/React-Material-Starter"
+          size="large"
+          variant="outlined"
+        >
+          Source Code
+        </Button>
+        <Button
+          className={classes.buttonLink}
+          color="primary"
+          component={RouterLink('/about')}
+          endIcon={<ArrowForward />}
+          size="large"
+          variant="outlined"
+        >
+          More Info
+        </Button>
+      </div>
 
     </div>
   );

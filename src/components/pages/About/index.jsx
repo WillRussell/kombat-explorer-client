@@ -13,10 +13,19 @@ function About() {
     <div className={classes.root}>
 
       <Typography
-        gutterBottom
-        variant="h1"
+        className={classes.title}
+        component="h1"
+        variant="h3"
       >
         About Page
+      </Typography>
+
+      <Typography
+        className={classes.subtitle}
+        color="textSecondary"
+        variant="caption"
+      >
+        Projects Details...
       </Typography>
 
       <Button
