@@ -1,15 +1,12 @@
-import './index.scss';
-
-import Typography from '@material-ui/core/Typography';
+import Root from 'components/Root';
+import ThemeContextProvider from 'context/ThemeContext';
 import React from 'react';
 
 function App() {
   return (
-    <div className="App">
-      <Typography variant="h6">
-        Hello World
-      </Typography>
-    </div>
+    <ThemeContextProvider>
+      <Root />
+    </ThemeContextProvider>
   );
 }
 

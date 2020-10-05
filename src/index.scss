@@ -12,5 +12,10 @@ html {
 			"Helvetica Neue", sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		#root {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+		}
 	}
 }
