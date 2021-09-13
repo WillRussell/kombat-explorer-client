@@ -1,5 +1,5 @@
 {
-  "name": "react-material-starter",
+  "name": "kombat-explorer",
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
@@ -9,6 +9,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -23,7 +26,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js --ext .jsx .",
-    "deploy": "aws s3 sync build/ s3://react-material-starter --acl public-read"
+    "deploy": "aws s3 sync build/ s3://kombat-explorer --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
