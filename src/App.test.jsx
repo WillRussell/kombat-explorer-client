@@ -6,6 +6,6 @@ import App from './App';
 
 test('renders learn react link', () => {
   const { getByText } = render(<Router><App /></Router>);
-  const linkElement = getByText(/react material starter/i);
+  const linkElement = getByText(/kombat explorer/i);
   expect(linkElement).toBeInTheDocument();
 });

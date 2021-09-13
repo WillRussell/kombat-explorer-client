@@ -13,7 +13,7 @@ function TopNav() {
     <AppBar className={classes.appBar} elevation={2} position="fixed">
       <Toolbar>
         <Typography className={classes.grow} noWrap variant="h6">
-          React Material Starter
+          Kombat Explorer
         </Typography>
         <ThemeToggle />
       </Toolbar>
