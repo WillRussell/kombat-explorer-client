@@ -1,10 +1,10 @@
 import { withTheme } from '@material-ui/core/styles';
-import About from 'components/pages/About';
-import Home from 'components/pages/Home';
 import TopNav from 'components/TopNav';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import FightCard from '../../pages/FightCard';
+import Home from '../../pages/Home';
 import useStyles from './styles';
 
 function Layout() {
@@ -19,9 +19,10 @@ function Layout() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/about">
-            <About />
-          </Route>
+          <Route
+            path="/fights/:id"
+            render={(props) => <FightCard {...props} />}
+          />
         </Switch>
       </main>
     </div>
