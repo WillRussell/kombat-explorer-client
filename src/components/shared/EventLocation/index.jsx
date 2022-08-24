@@ -1,6 +1,6 @@
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import LocationIcon from '@material-ui/icons/LocationOn';
+import PublicIcon from '@material-ui/icons/Public';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -14,7 +14,7 @@ function EventLocation({ location, isBold }) {
 
   return (
     <div className={classes.root}>
-      <LocationIcon className={iconStyle} />
+      <PublicIcon className={iconStyle} />
       <Typography className={textStyle}>{location}</Typography>
     </div>
   );
