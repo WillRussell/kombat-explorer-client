@@ -1,3 +1,4 @@
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -5,6 +6,7 @@ import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import PersonIcon from '@material-ui/icons/Person';
 import ErrorMessage from 'components/shared/ErrorMessage';
 import EventDate from 'components/shared/EventDate';
 import EventLocation from 'components/shared/EventLocation';
@@ -24,6 +26,18 @@ function FightCard() {
   const [{ fightCard, isLoading, isError }] = useFetchFightCard(id);
   const fights = get(fightCard, 'fights', []);
 
+  const getFighterAvatar = (fighter) => (
+    <div className={classes.avatarSection}>
+      <Avatar>
+        <PersonIcon />
+      </Avatar>
+      <div className={classes.fighterinfo}>
+        <Typography variant="h5">{fighter.name}</Typography>
+        <Typography variant="caption">{fighter.record}</Typography>
+      </div>
+    </div>
+  );
+
   const listItems = fights.map((item) => (
     <Paper
       className={classes.fightContainer}
@@ -33,9 +47,7 @@ function FightCard() {
       <Grid container direction="row" justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={5}>
           <div className={classes.cardLeft}>
-            <Typography variant="h4">{item.fighterOne.name}</Typography>
-            <Typography variant="caption">{item.fighterOne.record}</Typography>
-            <Typography variant="caption">{item.fighterOne.result}</Typography>
+            { getFighterAvatar(item.fighterOne) }
           </div>
         </Grid>
 
@@ -49,9 +61,7 @@ function FightCard() {
 
         <Grid item xs={12} sm={5}>
           <div className={classes.cardRight}>
-            <Typography variant="h4">{item.fighterTwo.name}</Typography>
-            <Typography variant="caption">{item.fighterTwo.record}</Typography>
-            <Typography variant="caption">{item.fighterTwo.result}</Typography>
+            { getFighterAvatar(item.fighterTwo) }
           </div>
         </Grid>
       </Grid>
@@ -68,7 +78,7 @@ function FightCard() {
           startIcon={<ArrowBack />}
           variant="outlined"
         >
-          Back
+          Events List
         </Button>
       </Container>
 
@@ -81,7 +91,7 @@ function FightCard() {
       {fights.length > 0 && (
         <Container className={classes.paperWrapper} maxWidth="lg">
           <div>
-            <Typography variant="h3">{fightCard.eventName}</Typography>
+            <Typography variant="h4">{fightCard.eventName}</Typography>
             <EventLocation
               location={fightCard.location}
             />

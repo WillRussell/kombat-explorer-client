@@ -14,6 +14,15 @@ const styles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     padding: theme.spacing(4),
   },
+  avatarSection: {
+    display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    padding: theme.spacing(4),
+  },
+  fighterinfo: {
+    marginLeft: theme.spacing(1),
+  },
   cardLeft: {
     display: 'flex',
     flex: 1,
