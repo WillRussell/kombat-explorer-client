@@ -9,7 +9,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack';
 import PersonIcon from '@material-ui/icons/Person';
 import ErrorMessage from 'components/shared/ErrorMessage';
 import EventDate from 'components/shared/EventDate';
-import EventLocation from 'components/shared/EventLocation';
+import EventVenue from 'components/shared/EventVenue';
 import LoadingCircle from 'components/shared/LoadingCircle';
 import useFetchFightCard from 'hooks/useFetchFightCard';
 import { get } from 'lodash';
@@ -92,8 +92,8 @@ function FightCard() {
         <Container className={classes.paperWrapper} maxWidth="lg">
           <div>
             <Typography variant="h4">{fightCard.eventName}</Typography>
-            <EventLocation
-              location={fightCard.location}
+            <EventVenue
+              venue={fightCard.location}
             />
             <EventDate
               date={moment(fightCard.unixDate).format('dddd, MMMM Do, YYYY')}
