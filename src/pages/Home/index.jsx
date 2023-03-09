@@ -10,6 +10,8 @@ import EventLocation from 'components/shared/EventLocation';
 import EventVenue from 'components/shared/EventVenue';
 import FilterSearchbar from 'components/shared/FilterSearchbar';
 import LoadingCircle from 'components/shared/LoadingCircle';
+import RawDataView from 'components/shared/RawDataView';
+import RawToggleSwitch from 'components/shared/RawToggleSwitch';
 import useFetchEvents from 'hooks/useFetchEvents';
 import { isEmpty } from 'lodash';
 import moment from 'moment';
@@ -22,6 +24,7 @@ import useStyles from './styles';
 function Home() {
   const classes = useStyles();
   const [searchInput, setInput] = useState();
+  const [isRaw, setIsRaw] = useState(false);
   const [{ eventsCollection, isLoading, isError }] = useFetchEvents();
 
   const disableInputs = isLoading || isError;
@@ -59,6 +62,24 @@ function Home() {
   ));
 
   const activeContent = () => {
+    if (isLoading) {
+      return <LoadingCircle />;
+    }
+
+    if (isError) {
+      return (
+        <ErrorMessage message="There was an error fetching the events collection." />
+      );
+    }
+
+    if (isRaw) {
+      return (
+        <Container className={classes.paperWrapper} maxWidth="lg">
+          <RawDataView data={filteredCollection} />
+        </Container>
+      );
+    }
+
     if (!isEmpty(filteredCollection)) {
       return (
         <Container className={classes.paperWrapper} maxWidth="lg">
@@ -74,18 +95,22 @@ function Home() {
 
   return (
     <div className={classes.root}>
-      {isLoading && <LoadingCircle />}
-
-      {isError && (
-        <ErrorMessage message="There was an error fetching the events collection." />
-      )}
-
       {eventsCollection.length > 0 && (
         <Container className={classes.paperWrapper} maxWidth="lg">
-          <FilterSearchbar disabled={disableInputs} setInput={setInput} />
-          { activeContent() }
+          <div className={classes.titleArea}>
+            <div className={classes.titleActions}>
+              <FilterSearchbar disabled={disableInputs} setInput={setInput} />
+              <RawToggleSwitch
+                isRaw={isRaw}
+                setIsRaw={setIsRaw}
+                disabled={disableInputs}
+              />
+            </div>
+          </div>
         </Container>
       )}
+
+      {activeContent()}
     </div>
   );
 }

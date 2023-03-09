@@ -7,6 +7,16 @@ const styles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  titleArea: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: theme.spacing(3),
+  },
+  titleActions: {
+    flex: 1,
+    flexDirection: 'row',
+    display: 'flex',
+  },
   eventCard: {
     marginBottom: theme.spacing(2),
     padding: theme.spacing(4),
@@ -26,7 +36,8 @@ const styles = makeStyles((theme) => ({
     marginRight: theme.spacing(4),
   },
   paperWrapper: {
-    margin: theme.spacing(3),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
 }));
 
