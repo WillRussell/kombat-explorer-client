@@ -53,7 +53,7 @@ function FightCard() {
 
         <Grid item xs={12} sm={2}>
           <div className={classes.cardMiddle}>
-            <Typography variant="h4" color="textSecondary">
+            <Typography variant="h5" color="textSecondary">
               VS
             </Typography>
           </div>
@@ -70,11 +70,10 @@ function FightCard() {
 
   return (
     <div className={classes.root}>
-      <Container className={classes.buttonContainer} maxWidth="lg">
+      <Container className={classes.buttonContainer} maxWidth="md">
         <Button
           color="secondary"
           component={RouterLink('/')}
-          size="large"
           startIcon={<ArrowBack />}
           variant="outlined"
         >
@@ -89,9 +88,9 @@ function FightCard() {
       )}
 
       {fights.length > 0 && (
-        <Container className={classes.paperWrapper} maxWidth="lg">
+        <Container className={classes.paperWrapper} maxWidth="md">
           <div>
-            <Typography variant="h4">{fightCard.eventName}</Typography>
+            <Typography variant="h5">{fightCard.eventName}</Typography>
             <EventVenue
               venue={fightCard.location}
             />

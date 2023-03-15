@@ -33,7 +33,7 @@ function Home() {
   const listItems = filteredCollection.map((item) => (
     <Paper className={classes.eventCard} key={item.id} elevation={3}>
       <div className={classes.cardLeft}>
-        <Typography component="h1" variant="h4">
+        <Typography component="h1" variant="h5">
           {item.title}
           {' - '}
           {item.subtitle}
@@ -74,7 +74,7 @@ function Home() {
 
     if (isRaw) {
       return (
-        <Container className={classes.paperWrapper} maxWidth="lg">
+        <Container maxWidth="md">
           <RawDataView data={filteredCollection} />
         </Container>
       );
@@ -82,10 +82,8 @@ function Home() {
 
     if (!isEmpty(filteredCollection)) {
       return (
-        <Container className={classes.paperWrapper} maxWidth="lg">
-          <div>
-            <List>{listItems}</List>
-          </div>
+        <Container maxWidth="md">
+          <List>{listItems}</List>
         </Container>
       );
     }
@@ -96,7 +94,7 @@ function Home() {
   return (
     <div className={classes.root}>
       {eventsCollection.length > 0 && (
-        <Container className={classes.paperWrapper} maxWidth="lg">
+        <Container maxWidth="md">
           <div className={classes.titleArea}>
             <div className={classes.titleActions}>
               <FilterSearchbar disabled={disableInputs} setInput={setInput} />

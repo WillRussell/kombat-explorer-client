@@ -1,4 +1,3 @@
-import Container from '@material-ui/core/Container';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { withTheme } from '@material-ui/core/styles';
@@ -16,7 +15,7 @@ function FilterSearchbar({ setInput, disabled }) {
   };
 
   return (
-    <Container className={classes.searchContainer} maxWidth="lg">
+    <div className={classes.searchContainer}>
       <Input
         color="secondary"
         disabled={disabled}
@@ -28,7 +27,7 @@ function FilterSearchbar({ setInput, disabled }) {
           </InputAdornment>
         )}
       />
-    </Container>
+    </div>
   );
 }
 
