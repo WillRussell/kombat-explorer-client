@@ -1,5 +1,5 @@
 import {
-  blue, lightBlue, red, teal,
+  blue, deepPurple, lightBlue, red, teal,
 } from '@material-ui/core/colors';
 import { createTheme } from '@material-ui/core/styles';
 
@@ -11,6 +11,7 @@ export const darkTheme = createTheme({
     error: {
       main: red[400],
     },
+    warning: deepPurple,
   },
 });
 
@@ -22,5 +23,6 @@ export const lightTheme = createTheme({
     error: {
       main: red[400],
     },
+    warning: deepPurple,
   },
 });

@@ -11,7 +11,7 @@ function EventDate({ date }) {
   return (
     <div className={classes.root}>
       <EventIcon className={classes.icon} />
-      <Typography>{date}</Typography>
+      <Typography color="textSecondary">{date}</Typography>
     </div>
   );
 }

@@ -15,7 +15,7 @@ function EventLocation({ location }) {
   return hasLocation && (
   <div className={classes.root}>
     <PublicIcon className={classes.icon} />
-    <Typography>{location}</Typography>
+    <Typography color="textSecondary">{location}</Typography>
   </div>
   );
 }

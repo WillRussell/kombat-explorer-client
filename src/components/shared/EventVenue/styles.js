@@ -6,6 +6,7 @@ const styles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   icon: {
+    color: theme.palette.warning.light,
     marginRight: theme.spacing(3 / 4),
   },
 }));

@@ -13,7 +13,7 @@ function EventVenue({ venue }) {
   return !isNull(venue) && (
   <div className={classes.root}>
     <LocationIcon className={classes.icon} />
-    <Typography>{venue}</Typography>
+    <Typography color="textSecondary">{venue}</Typography>
   </div>
   );
 }
