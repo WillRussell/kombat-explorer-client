@@ -10,6 +10,12 @@ const styles = makeStyles((theme) => ({
   buttonContainer: {
     marginTop: theme.spacing(2),
   },
+
+  headerContainer: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   fightContainer: {
     marginBottom: theme.spacing(2),
     padding: theme.spacing(4),

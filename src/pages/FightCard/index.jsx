@@ -11,10 +11,12 @@ import ErrorMessage from 'components/shared/ErrorMessage';
 import EventDate from 'components/shared/EventDate';
 import EventVenue from 'components/shared/EventVenue';
 import LoadingCircle from 'components/shared/LoadingCircle';
+import RawDataView from 'components/shared/RawDataView';
+import RawToggleSwitch from 'components/shared/RawToggleSwitch';
 import useFetchFightCard from 'hooks/useFetchFightCard';
 import { get } from 'lodash';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import RouterLink from '../../router/RouterLink';
@@ -23,6 +25,7 @@ import useStyles from './styles';
 function FightCard() {
   const classes = useStyles();
   const { id } = useParams();
+  const [isRaw, setIsRaw] = useState(false);
   const [{ fightCard, isLoading, isError }] = useFetchFightCard(id);
   const fights = get(fightCard, 'fights', []);
 
@@ -44,7 +47,12 @@ function FightCard() {
       key={item.fightName}
       elevation={3}
     >
-      <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Grid item xs={12} sm={5}>
           <div className={classes.cardLeft}>
             { getFighterAvatar(item.fighterOne) }
@@ -89,18 +97,26 @@ function FightCard() {
 
       {fights.length > 0 && (
         <Container className={classes.paperWrapper} maxWidth="md">
-          <div>
-            <Typography variant="h5">{fightCard.eventName}</Typography>
-            <EventVenue
-              venue={fightCard.location}
-            />
-            <EventDate
-              date={moment(fightCard.unixDate).format('dddd, MMMM Do, YYYY')}
-            />
+          <div className={classes.headerContainer}>
+            <div>
+              <Typography variant="h5">{fightCard.eventName}</Typography>
+              <EventVenue venue={fightCard.location} />
+              <EventDate
+                date={moment(fightCard.unixDate).format('dddd, MMMM Do, YYYY')}
+              />
+            </div>
+            <div>
+              <RawToggleSwitch
+                isRaw={isRaw}
+                setIsRaw={setIsRaw}
+                disabled={isLoading}
+              />
+            </div>
           </div>
 
           <div>
-            <List>{listItems}</List>
+            {isRaw && <RawDataView data={fights} />}
+            {!isRaw && <List>{listItems}</List>}
           </div>
         </Container>
       )}
