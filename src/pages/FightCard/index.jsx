@@ -29,6 +29,11 @@ function FightCard() {
   const [{ fightCard, isLoading, isError }] = useFetchFightCard(id);
   const fights = get(fightCard, 'fights', []);
 
+  // TODO: handle this check the server instead of the client
+  const hasMainEvent = fights.length >= 1
+  && Object.values(fights[0].fighterOne).every((val) => val !== '')
+  && Object.values(fights[0].fighterTwo).every((val) => val !== '');
+
   const getFighterAvatar = (fighter) => (
     <div className={classes.avatarSection}>
       <Avatar>
@@ -116,7 +121,8 @@ function FightCard() {
 
           <div>
             {isRaw && <RawDataView data={fights} />}
-            {!isRaw && <List>{listItems}</List>}
+            {!isRaw && hasMainEvent && <List>{listItems}</List>}
+            {!isRaw && !hasMainEvent && <ErrorMessage message="This card doesn't have a main event yet." />}
           </div>
         </Container>
       )}
