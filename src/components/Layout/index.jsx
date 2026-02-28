@@ -3,6 +3,7 @@ import TopNav from 'components/TopNav';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import EventsMap from '../../pages/EventsMap';
 import FightCard from '../../pages/FightCard';
 import Home from '../../pages/Home';
 import useStyles from './styles';
@@ -18,6 +19,9 @@ function Layout() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/map">
+            <EventsMap />
           </Route>
           <Route
             path="/fights/:id"
