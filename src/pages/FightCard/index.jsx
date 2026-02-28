@@ -2,7 +2,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ArrowBack from '@material-ui/icons/ArrowBack';
@@ -36,12 +35,12 @@ function FightCard() {
 
   const getFighterAvatar = (fighter) => (
     <div className={classes.avatarSection}>
-      <Avatar>
+      <Avatar className={classes.avatar}>
         <PersonIcon />
       </Avatar>
       <div className={classes.fighterinfo}>
-        <Typography variant="h5">{fighter.name}</Typography>
-        <Typography variant="caption">{fighter.record}</Typography>
+        <Typography className={classes.fighterName} variant="h5">{fighter.name}</Typography>
+        <Typography className={classes.fighterRecord} variant="caption">{fighter.record}</Typography>
       </div>
     </div>
   );
@@ -66,7 +65,7 @@ function FightCard() {
 
         <Grid item xs={12} sm={2}>
           <div className={classes.cardMiddle}>
-            <Typography variant="h5" color="textSecondary">
+            <Typography className={classes.vsText} variant="h5">
               VS
             </Typography>
           </div>
@@ -85,6 +84,7 @@ function FightCard() {
     <div className={classes.root}>
       <Container className={classes.buttonContainer} maxWidth="md">
         <Button
+          className={classes.backButton}
           color="secondary"
           component={RouterLink('/')}
           startIcon={<ArrowBack />}
@@ -104,7 +104,7 @@ function FightCard() {
         <Container className={classes.paperWrapper} maxWidth="md">
           <div className={classes.headerContainer}>
             <div>
-              <Typography variant="h5">{fightCard.eventName}</Typography>
+              <Typography className={classes.headerTitle} variant="h4">{fightCard.eventName}</Typography>
               <EventVenue venue={fightCard.location} />
               <EventDate
                 date={moment(fightCard.unixDate).format('dddd, MMMM Do, YYYY')}
@@ -121,7 +121,7 @@ function FightCard() {
 
           <div>
             {isRaw && <RawDataView data={fights} />}
-            {!isRaw && hasMainEvent && <List>{listItems}</List>}
+            {!isRaw && hasMainEvent && <div>{listItems}</div>}
             {!isRaw && !hasMainEvent && <ErrorMessage message="This card doesn't have a main event yet." />}
           </div>
         </Container>

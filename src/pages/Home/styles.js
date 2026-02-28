@@ -20,23 +20,37 @@ const styles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     display: 'flex',
   },
+  eventsGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    gap: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+    },
+  },
   eventCard: {
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(4),
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'row',
-  },
-  cardLeft: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-  },
-  cardRight: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    marginRight: theme.spacing(4),
+    padding: theme.spacing(3),
+    borderLeft: `4px solid ${theme.palette.primary.main}`,
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
+    '&:hover': {
+      transform: 'translateY(-4px)',
+      boxShadow: theme.shadows[12],
+      borderLeftColor: theme.palette.secondary.main,
+    },
+  },
+  cardContent: {
+    flex: 1,
+  },
+  cardTitle: {
+    fontWeight: 700,
+    marginBottom: theme.spacing(0.5),
+  },
+  cardActions: {
+    borderTop: `1px solid ${theme.palette.divider}`,
+    paddingTop: theme.spacing(2),
+    marginTop: theme.spacing(2),
   },
 }));
 

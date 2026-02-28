@@ -1,24 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const styles = makeStyles((theme) => {
-  const isLight = theme.palette.type === 'light';
-  const appBackground = isLight ? theme.palette.grey['200'] : 'initial';
-  return {
-    layout: {
-      display: 'flex',
-      flex: 1,
-      backgroundColor: appBackground,
+const styles = makeStyles((theme) => ({
+  layout: {
+    display: 'flex',
+    flex: 1,
+    minHeight: '100vh',
+    backgroundColor: theme.palette.background.default,
+  },
+  pageContent: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(3),
     },
-    pageContent: {
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      padding: theme.spacing(1),
-    },
-    buffer: {
-      ...theme.mixins.toolbar,
-    },
-  };
-});
+  },
+  buffer: {
+    ...theme.mixins.toolbar,
+  },
+}));
 
 export default styles;

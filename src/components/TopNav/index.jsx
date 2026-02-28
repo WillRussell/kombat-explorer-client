@@ -10,10 +10,12 @@ function TopNav() {
   const classes = useStyles();
 
   return (
-    <AppBar className={classes.appBar} elevation={2} position="fixed">
-      <Toolbar>
-        <Typography className={classes.grow} noWrap variant="h6">
-          Kombat Explorer
+    <AppBar className={classes.appBar} elevation={0} position="fixed">
+      <Toolbar className={classes.toolbar}>
+        <Typography className={`${classes.grow} ${classes.brandText}`} noWrap variant="h6">
+          <span className={classes.brandAccent}>Kombat</span>
+          {' '}
+          Explorer
         </Typography>
         <ThemeToggle />
       </Toolbar>

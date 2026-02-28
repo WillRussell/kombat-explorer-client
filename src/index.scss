@@ -2,6 +2,7 @@ html {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	scroll-behavior: smooth;
 	body {
 		display: flex;
 		flex: 1;
@@ -18,4 +19,8 @@ html {
 			flex-direction: column;
 		}
 	}
+}
+
+::selection {
+	background: rgba(220, 38, 38, 0.3);
 }

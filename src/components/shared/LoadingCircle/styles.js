@@ -6,6 +6,7 @@ const styles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    minHeight: 200,
   },
 }));
 
