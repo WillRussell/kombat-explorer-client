@@ -7,6 +7,7 @@ const styles = makeStyles((theme) => ({
   appBar: {
     borderBottom: `3px solid ${theme.palette.primary.main}`,
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    color: '#F5F5F5',
   },
   toolbar: {
     minHeight: 64,

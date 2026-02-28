@@ -26,7 +26,7 @@ const styles = makeStyles((theme) => {
       paddingLeft: theme.spacing(2),
       background: isDark
         ? 'linear-gradient(135deg, rgba(220,38,38,0.08) 0%, transparent 60%)'
-        : 'linear-gradient(135deg, rgba(185,28,28,0.05) 0%, transparent 60%)',
+        : 'linear-gradient(135deg, rgba(185,28,28,0.06) 0%, transparent 60%)',
     },
     headerTitle: {
       fontWeight: 800,
@@ -35,13 +35,17 @@ const styles = makeStyles((theme) => {
       marginBottom: theme.spacing(2),
       padding: theme.spacing(4),
       borderLeft: '3px solid transparent',
+      border: isDark ? 'none' : '1px solid #D4D4D4',
+      borderLeftWidth: '3px',
+      borderLeftStyle: 'solid',
+      borderLeftColor: 'transparent',
       transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
       '&:first-child': {
         borderLeftColor: theme.palette.primary.main,
       },
       '&:hover': {
         borderLeftColor: theme.palette.secondary.main,
-        boxShadow: theme.shadows[8],
+        boxShadow: isDark ? theme.shadows[8] : '0 6px 20px rgba(0,0,0,0.1)',
       },
     },
     avatarSection: {

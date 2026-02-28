@@ -66,9 +66,17 @@ export const lightTheme = createTheme({
       main: '#EF4444',
     },
     warning: {
-      main: '#F59E0B',
-      light: '#FBBF24',
-      dark: '#D97706',
+      main: '#D97706',
+      light: '#F59E0B',
+      dark: '#B45309',
+    },
+    background: {
+      default: '#EDEDED',
+      paper: '#F7F7F7',
+    },
+    text: {
+      primary: '#1A1A1A',
+      secondary: '#525252',
     },
   },
   typography: {
@@ -85,7 +93,7 @@ export const lightTheme = createTheme({
       root: { borderRadius: 6, fontWeight: 700, textTransform: 'uppercase' },
     },
     MuiAppBar: {
-      colorPrimary: { backgroundColor: '#FFFFFF' },
+      colorPrimary: { backgroundColor: '#1A1A1A' },
     },
   },
 });

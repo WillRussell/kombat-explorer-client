@@ -7,8 +7,8 @@ const styles = makeStyles((theme) => {
       marginTop: theme.spacing(1),
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
-      backgroundColor: isDark ? '#111111' : theme.palette.background.paper,
-      border: `1px solid ${isDark ? '#2A2A2A' : theme.palette.divider}`,
+      backgroundColor: isDark ? '#111111' : '#EFEFEF',
+      border: `1px solid ${isDark ? '#2A2A2A' : '#D4D4D4'}`,
     },
     preformat: {
       whiteSpace: 'pre-wrap',

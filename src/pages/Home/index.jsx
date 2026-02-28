@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import SearchOff from '@material-ui/icons/SearchOutlined';
 import ErrorMessage from 'components/shared/ErrorMessage';
 import EventDate from 'components/shared/EventDate';
 import EventLocation from 'components/shared/EventLocation';
@@ -34,7 +35,8 @@ function Home() {
       <div className={classes.cardContent}>
         <Typography className={classes.cardTitle} component="h1" variant="h5">
           {item.title}
-          {' - '}
+        </Typography>
+        <Typography className={classes.cardSubtitle} variant="body1">
           {item.subtitle}
         </Typography>
         <EventVenue venue={item.locationDetails.venue} />
@@ -87,7 +89,15 @@ function Home() {
       );
     }
 
-    return <ErrorMessage message="No events found!" />;
+    return (
+      <div className={classes.noResults}>
+        <SearchOff className={classes.noResultsIcon} />
+        <Typography variant="h6">No events found</Typography>
+        <Typography variant="body2" color="textSecondary">
+          Try adjusting your search terms
+        </Typography>
+      </div>
+    );
   };
 
   return (
