@@ -39,11 +39,15 @@ const styles = makeStyles((theme) => ({
   },
   buttonWrapper: {
     marginTop: theme.spacing(1.5),
-    paddingTop: theme.spacing(1.25),
-    borderTop: `1px solid ${theme.palette.divider}`,
     '& .MuiButton-root': {
-      color: theme.palette.primary.main,
-      borderColor: theme.palette.divider,
+      justifyContent: 'space-between',
+      color: theme.palette.primary.contrastText,
+      backgroundColor: theme.palette.primary.main,
+      boxShadow: 'none',
+      '&:hover': {
+        backgroundColor: theme.palette.primary.dark,
+        boxShadow: 'none',
+      },
     },
   },
 }));

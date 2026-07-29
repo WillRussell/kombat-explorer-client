@@ -4,29 +4,35 @@ import Container from '@material-ui/core/Container';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ErrorMessage from 'components/shared/ErrorMessage';
+import EventGroupPopup from 'components/shared/EventGroupPopup';
 import EventPopup from 'components/shared/EventPopup';
 import LoadingCircle from 'components/shared/LoadingCircle';
 import useFetchEvents from 'hooks/useFetchEvents';
 import L from 'leaflet';
 import React from 'react';
 import {
-  Map, Marker, Popup, TileLayer,
+  Map as LeafletMap, Marker, Popup, TileLayer,
 } from 'react-leaflet';
 
 import { getEventCoordinates } from '../../support/eventCoordinates';
 import useStyles from './styles';
 
-// Fix default marker icons broken by webpack
-// eslint-disable-next-line no-underscore-dangle
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  // eslint-disable-next-line global-require
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  // eslint-disable-next-line global-require
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  // eslint-disable-next-line global-require
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
+const markerIconCache = {};
+
+const getEventMarkerIcon = (eventCount) => {
+  if (!markerIconCache[eventCount]) {
+    const isGroup = eventCount > 1;
+    markerIconCache[eventCount] = L.divIcon({
+      className: `event-marker-icon${isGroup ? ' event-marker-icon-group' : ''}`,
+      html: `<span class="event-marker-dot">${isGroup ? eventCount : ''}</span>`,
+      iconAnchor: [16, 16],
+      iconSize: [32, 32],
+      popupAnchor: [0, -14],
+    });
+  }
+
+  return markerIconCache[eventCount];
+};
 
 function EventsMap() {
   const classes = useStyles();
@@ -51,6 +57,23 @@ function EventsMap() {
       return coords ? { ...event, coords } : null;
     })
     .filter(Boolean);
+  const groupedByCoordinates = new Map();
+
+  geoEvents.forEach((event) => {
+    const coordinateKey = event.coords.join(',');
+    const existingGroup = groupedByCoordinates.get(coordinateKey);
+
+    if (existingGroup) {
+      existingGroup.events.push(event);
+    } else {
+      groupedByCoordinates.set(coordinateKey, {
+        coords: event.coords,
+        events: [event],
+      });
+    }
+  });
+
+  const markerGroups = Array.from(groupedByCoordinates.values());
 
   return (
     <div className={classes.root}>
@@ -67,25 +90,49 @@ function EventsMap() {
               See where upcoming cards are happening.
             </Typography>
           </div>
-          <Typography className={classes.eventCount} color="textSecondary" variant="body2">
-            {`${geoEvents.length} ${geoEvents.length === 1 ? 'location' : 'locations'}`}
-          </Typography>
+          <div className={classes.mapSummary}>
+            <Typography className={classes.eventCount} color="textSecondary" variant="body2">
+              {`${geoEvents.length} of ${eventsCollection.length} mapped`}
+            </Typography>
+            <Typography className={classes.mapPointCount} color="textSecondary" variant="caption">
+              {`${markerGroups.length} ${markerGroups.length === 1 ? 'map point' : 'map points'}`}
+            </Typography>
+          </div>
         </div>
 
         <div className={classes.mapWrapper}>
-          <Map center={[25, 0]} zoom={3} scrollWheelZoom zoomControl>
+          <div className={classes.mapLegend}>
+            <div className={classes.legendLine}>
+              <span className={classes.legendMarker} />
+              <Typography className={classes.legendTitle} variant="body2">
+                Event location
+              </Typography>
+            </div>
+            <Typography className={classes.legendHint} variant="caption">
+              Numbered points contain multiple events
+            </Typography>
+          </div>
+
+          <LeafletMap center={[25, 0]} zoom={3} scrollWheelZoom zoomControl>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {geoEvents.map((event) => (
-              <Marker key={event.id} position={event.coords}>
+            {markerGroups.map(({ coords, events }) => (
+              <Marker
+                icon={getEventMarkerIcon(events.length)}
+                key={coords.join(',')}
+                position={coords}
+                title={`${events.length} ${events.length === 1 ? 'event' : 'events'}`}
+              >
                 <Popup>
-                  <EventPopup event={event} />
+                  {events.length === 1
+                    ? <EventPopup event={events[0]} />
+                    : <EventGroupPopup events={events} />}
                 </Popup>
               </Marker>
             ))}
-          </Map>
+          </LeafletMap>
         </div>
       </Container>
     </div>

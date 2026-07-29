@@ -59,9 +59,10 @@ function EventPopup({ event }) {
         <Button
           color="primary"
           component={RouterLink(`/fights/${event.id}`)}
+          disableElevation
           endIcon={<ArrowForward />}
           size="small"
-          variant="outlined"
+          variant="contained"
           fullWidth
         >
           View Fight Card
