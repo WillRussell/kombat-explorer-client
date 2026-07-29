@@ -7,75 +7,123 @@ const styles = makeStyles((theme) => {
       display: 'flex',
       flex: 1,
       flexDirection: 'column',
-      alignItems: 'center',
+      width: '100%',
     },
     buttonContainer: {
-      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
     backButton: {
-      borderWidth: 2,
+      minHeight: 36,
+      marginLeft: theme.spacing(-1),
+      color: theme.palette.text.secondary,
       '&:hover': {
-        borderWidth: 2,
+        color: theme.palette.text.primary,
+        backgroundColor: 'transparent',
       },
     },
     headerContainer: {
-      flex: 1,
       display: 'flex',
+      alignItems: 'flex-end',
       justifyContent: 'space-between',
-      borderLeft: `4px solid ${theme.palette.primary.main}`,
-      paddingLeft: theme.spacing(2),
-      background: isDark
-        ? 'linear-gradient(135deg, rgba(220,38,38,0.08) 0%, transparent 60%)'
-        : 'linear-gradient(135deg, rgba(185,28,28,0.06) 0%, transparent 60%)',
+      gap: theme.spacing(3),
+      marginBottom: theme.spacing(3),
+      paddingBottom: theme.spacing(3),
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      [theme.breakpoints.down('xs')]: {
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        gap: theme.spacing(2),
+      },
+    },
+    eyebrow: {
+      marginBottom: theme.spacing(0.5),
+      color: theme.palette.primary.main,
+      fontSize: '0.7rem',
+      fontWeight: 700,
+      letterSpacing: '0.09em',
+      lineHeight: 1.5,
     },
     headerTitle: {
-      fontWeight: 800,
+      marginBottom: theme.spacing(1.5),
+    },
+    headerAction: {
+      display: 'flex',
+      alignItems: 'center',
+      flexShrink: 0,
+      gap: theme.spacing(1),
     },
     fightContainer: {
       marginBottom: theme.spacing(2),
-      padding: theme.spacing(4),
-      borderLeft: '3px solid transparent',
-      border: isDark ? 'none' : '1px solid #D4D4D4',
-      borderLeftWidth: '3px',
-      borderLeftStyle: 'solid',
-      borderLeftColor: 'transparent',
+      padding: theme.spacing(0, 3, 2.5),
+      border: `1px solid ${theme.palette.divider}`,
+      boxShadow: isDark ? 'none' : '0 1px 2px rgba(23, 36, 44, 0.03)',
       transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-      '&:first-child': {
-        borderLeftColor: theme.palette.primary.main,
-      },
       '&:hover': {
-        borderLeftColor: theme.palette.secondary.main,
-        boxShadow: isDark ? theme.shadows[8] : '0 6px 20px rgba(0,0,0,0.1)',
+        borderColor: isDark ? '#40515A' : '#CAD5DB',
+        boxShadow: isDark
+          ? '0 8px 24px rgba(0, 0, 0, 0.16)'
+          : '0 8px 24px rgba(23, 36, 44, 0.07)',
       },
+    },
+    boutHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      minHeight: 42,
+      gap: theme.spacing(2),
+      borderBottom: `1px solid ${theme.palette.divider}`,
+    },
+    boutNumber: {
+      color: theme.palette.primary.main,
+      fontWeight: 700,
     },
     avatarSection: {
       display: 'flex',
-      flex: 1,
-      flexDirection: 'row',
-      padding: theme.spacing(4),
+      alignItems: 'center',
+      padding: theme.spacing(3, 0),
+      [theme.breakpoints.down('xs')]: {
+        justifyContent: 'center',
+        padding: theme.spacing(2, 0),
+        textAlign: 'center',
+      },
     },
     avatar: {
-      backgroundColor: theme.palette.primary.main,
+      width: 48,
+      height: 48,
+      color: theme.palette.primary.main,
+      backgroundColor: isDark
+        ? 'rgba(143, 183, 204, 0.12)'
+        : theme.palette.primary.light,
     },
     fighterinfo: {
-      marginLeft: theme.spacing(1),
+      marginLeft: theme.spacing(1.5),
     },
     fighterName: {
-      fontWeight: 700,
+      fontSize: '1.05rem',
     },
     fighterRecord: {
-      textTransform: 'uppercase',
       color: theme.palette.text.secondary,
     },
     vsText: {
-      fontWeight: 800,
-      color: theme.palette.primary.main,
+      display: 'grid',
+      width: 36,
+      height: 36,
+      placeItems: 'center',
+      color: theme.palette.text.secondary,
+      backgroundColor: isDark ? '#11181C' : '#F5F7F8',
+      border: `1px solid ${theme.palette.divider}`,
+      borderRadius: '50%',
+      fontSize: '0.75rem',
+      fontWeight: 600,
     },
     cardLeft: {
       display: 'flex',
       flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-start',
+      [theme.breakpoints.down('xs')]: {
+        alignItems: 'center',
+      },
     },
     cardMiddle: {
       display: 'flex',
@@ -88,9 +136,12 @@ const styles = makeStyles((theme) => {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'flex-end',
+      [theme.breakpoints.down('xs')]: {
+        alignItems: 'center',
+      },
     },
     paperWrapper: {
-      margin: theme.spacing(3),
+      margin: '0 auto',
     },
   };
 });

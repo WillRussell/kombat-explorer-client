@@ -4,18 +4,19 @@ const styles = makeStyles((theme) => {
   const isDark = theme.palette.type === 'dark';
   return {
     paper: {
-      marginTop: theme.spacing(1),
-      padding: theme.spacing(2),
+      padding: theme.spacing(2.5),
       color: theme.palette.text.secondary,
-      backgroundColor: isDark ? '#111111' : '#EFEFEF',
-      border: `1px solid ${isDark ? '#2A2A2A' : '#D4D4D4'}`,
+      backgroundColor: isDark ? '#11181C' : '#F8FAFB',
+      border: `1px solid ${theme.palette.divider}`,
+      borderRadius: theme.shape.borderRadius,
     },
     preformat: {
       whiteSpace: 'pre-wrap',
       wordBreak: 'break-word',
       overflow: 'hidden',
       fontFamily: '"Roboto Mono", "Courier New", monospace',
-      fontSize: '0.85rem',
+      fontSize: '0.8rem',
+      lineHeight: 1.65,
     },
   };
 });

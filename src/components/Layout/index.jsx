@@ -15,7 +15,6 @@ function Layout() {
     <div className={classes.layout}>
       <TopNav />
       <main className={classes.pageContent}>
-        <div className={classes.buffer} />
         <Switch>
           <Route exact path="/">
             <Home />

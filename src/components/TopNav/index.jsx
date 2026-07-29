@@ -16,25 +16,26 @@ function TopNav() {
   const location = useLocation();
 
   return (
-    <AppBar className={classes.appBar} elevation={0} position="fixed">
+    <AppBar className={classes.appBar} elevation={0} position="sticky">
       <Toolbar className={classes.toolbar}>
-        <Typography className={`${classes.grow} ${classes.brandText}`} noWrap variant="h6">
-          <span className={classes.brandAccent}>Kombat</span>
-          {' '}
-          Explorer
-        </Typography>
+        <div className={classes.brand}>
+          <div className={classes.brandMark} aria-hidden="true">K</div>
+          <Typography className={`${classes.grow} ${classes.brandText}`} noWrap variant="h6">
+            Kombat Explorer
+          </Typography>
+        </div>
         <div className={classes.navLinks}>
           <Button
             className={`${classes.navLink} ${location.pathname === '/' ? classes.navLinkActive : ''}`}
             component={RouterLink('/')}
-            startIcon={<ViewListIcon />}
+            startIcon={<ViewListIcon className={classes.navIcon} />}
           >
             Events
           </Button>
           <Button
             className={`${classes.navLink} ${location.pathname === '/map' ? classes.navLinkActive : ''}`}
             component={RouterLink('/map')}
-            startIcon={<MapIcon />}
+            startIcon={<MapIcon className={classes.navIcon} />}
           >
             Map
           </Button>

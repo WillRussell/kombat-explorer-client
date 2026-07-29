@@ -12,8 +12,7 @@ function RawDataView({ data }) {
   return (
     <Paper
       className={classes.paper}
-      elevation={3}
-      square
+      elevation={0}
     >
       <pre className={classes.preformat}>
         { JSON.stringify(data, null, 2) }

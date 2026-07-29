@@ -21,7 +21,7 @@ function RawToggleSwitch({ isRaw, setIsRaw, disabled }) {
         <FormControlLabel
           value="start"
           control={<Switch checked={isRaw} onChange={() => setIsRaw(!isRaw)} />}
-          label={isRaw ? 'Raw' : 'Visual'}
+          label="Raw data"
           labelPlacement="start"
         />
       </FormGroup>

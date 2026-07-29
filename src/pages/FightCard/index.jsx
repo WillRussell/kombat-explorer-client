@@ -39,18 +39,33 @@ function FightCard() {
         <PersonIcon />
       </Avatar>
       <div className={classes.fighterinfo}>
-        <Typography className={classes.fighterName} variant="h5">{fighter.name}</Typography>
-        <Typography className={classes.fighterRecord} variant="caption">{fighter.record}</Typography>
+        <Typography className={classes.fighterName} variant="h5">
+          {fighter.name}
+        </Typography>
+        <Typography className={classes.fighterRecord} variant="caption">
+          {fighter.record}
+        </Typography>
       </div>
     </div>
   );
 
-  const listItems = fights.map((item) => (
+  const listItems = fights.map((item, index) => (
     <Paper
       className={classes.fightContainer}
       key={item.fightName}
-      elevation={3}
+      elevation={0}
     >
+      <div className={classes.boutHeader}>
+        <Typography className={classes.boutNumber} variant="caption">
+          {index === 0 ? 'Main event' : `Bout ${index + 1}`}
+        </Typography>
+        {item.fightName && (
+          <Typography color="textSecondary" variant="caption">
+            {item.fightName}
+          </Typography>
+        )}
+      </div>
+
       <Grid
         container
         direction="row"
@@ -59,21 +74,21 @@ function FightCard() {
       >
         <Grid item xs={12} sm={5}>
           <div className={classes.cardLeft}>
-            { getFighterAvatar(item.fighterOne) }
+            {getFighterAvatar(item.fighterOne)}
           </div>
         </Grid>
 
         <Grid item xs={12} sm={2}>
           <div className={classes.cardMiddle}>
             <Typography className={classes.vsText} variant="h5">
-              VS
+              vs
             </Typography>
           </div>
         </Grid>
 
         <Grid item xs={12} sm={5}>
           <div className={classes.cardRight}>
-            { getFighterAvatar(item.fighterTwo) }
+            {getFighterAvatar(item.fighterTwo)}
           </div>
         </Grid>
       </Grid>
@@ -85,12 +100,11 @@ function FightCard() {
       <Container className={classes.buttonContainer} maxWidth="md">
         <Button
           className={classes.backButton}
-          color="secondary"
+          color="primary"
           component={RouterLink('/')}
           startIcon={<ArrowBack />}
-          variant="outlined"
         >
-          Events List
+          Back to events
         </Button>
       </Container>
 
@@ -104,13 +118,21 @@ function FightCard() {
         <Container className={classes.paperWrapper} maxWidth="md">
           <div className={classes.headerContainer}>
             <div>
-              <Typography className={classes.headerTitle} variant="h4">{fightCard.eventName}</Typography>
+              <Typography className={classes.eyebrow} component="p" variant="overline">
+                Fight card
+              </Typography>
+              <Typography className={classes.headerTitle} component="h1" variant="h4">
+                {fightCard.eventName}
+              </Typography>
               <EventVenue venue={fightCard.location} />
               <EventDate
                 date={moment(fightCard.unixDate).format('dddd, MMMM Do, YYYY')}
               />
             </div>
-            <div>
+            <div className={classes.headerAction}>
+              <Typography color="textSecondary" variant="body2">
+                {`${fights.length} ${fights.length === 1 ? 'bout' : 'bouts'}`}
+              </Typography>
               <RawToggleSwitch
                 isRaw={isRaw}
                 setIsRaw={setIsRaw}

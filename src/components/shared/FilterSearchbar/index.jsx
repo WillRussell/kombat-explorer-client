@@ -1,5 +1,5 @@
-import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import InputBase from '@material-ui/core/InputBase';
 import { withTheme } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import PropTypes from 'prop-types';
@@ -16,11 +16,14 @@ function FilterSearchbar({ setInput, disabled }) {
 
   return (
     <div className={classes.searchContainer}>
-      <Input
+      <InputBase
+        className={classes.input}
         color="secondary"
         disabled={disabled}
+        fullWidth
+        inputProps={{ 'aria-label': 'Search events' }}
         onChange={handleChange}
-        placeholder="Search"
+        placeholder="Search events"
         startAdornment={(
           <InputAdornment position="start">
             <SearchIcon />

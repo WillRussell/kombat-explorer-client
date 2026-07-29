@@ -5,49 +5,91 @@ const styles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    borderBottom: `3px solid ${theme.palette.primary.main}`,
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-    color: '#F5F5F5',
+    zIndex: theme.zIndex.appBar,
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.type === 'dark'
+      ? 'rgba(16, 21, 24, 0.92)'
+      : 'rgba(255, 255, 255, 0.92)',
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    backdropFilter: 'blur(14px)',
+    WebkitBackdropFilter: 'blur(14px)',
   },
   toolbar: {
+    width: '100%',
+    maxWidth: 1200,
     minHeight: 64,
+    margin: '0 auto',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
-      minHeight: 72,
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(2),
     },
   },
-  brandText: {
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
+  brand: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'center',
+    minWidth: 0,
   },
-  brandAccent: {
-    color: theme.palette.primary.main,
+  brandMark: {
+    display: 'grid',
+    placeItems: 'center',
+    width: 30,
+    height: 30,
+    flexShrink: 0,
+    marginRight: theme.spacing(1.25),
+    borderRadius: 8,
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
+    fontSize: '0.9rem',
+    fontWeight: 700,
+  },
+  brandText: {
+    fontSize: '1rem',
+    fontWeight: 650,
+    letterSpacing: '-0.015em',
   },
   navLinks: {
     display: 'flex',
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(0.5),
     gap: theme.spacing(0.5),
   },
   navLink: {
-    color: '#A3A3A3',
-    fontWeight: 600,
-    fontSize: '0.8rem',
-    letterSpacing: '0.05em',
-    textTransform: 'uppercase',
-    padding: theme.spacing(0.75, 1.5),
-    borderRadius: 6,
+    minWidth: 0,
+    minHeight: 38,
+    color: theme.palette.text.secondary,
+    fontSize: '0.875rem',
+    padding: theme.spacing(0.75, 1.25),
+    borderRadius: 8,
     transition: 'color 0.2s ease, background-color 0.2s ease',
     '&:hover': {
-      color: '#F5F5F5',
-      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.action.hover,
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(0.75),
+      '& .MuiButton-startIcon': {
+        margin: 0,
+      },
+      '& .MuiButton-label': {
+        fontSize: 0,
+      },
     },
   },
   navLinkActive: {
-    color: '#F5F5F5',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.type === 'dark'
+      ? 'rgba(143, 183, 204, 0.12)'
+      : theme.palette.primary.light,
+    '&:hover': {
+      backgroundColor: theme.palette.type === 'dark'
+        ? 'rgba(143, 183, 204, 0.18)'
+        : theme.palette.primary.light,
+    },
   },
-  buffer: {
-    ...theme.mixins.toolbar,
+  navIcon: {
+    fontSize: '1.1rem !important',
   },
 }));
 

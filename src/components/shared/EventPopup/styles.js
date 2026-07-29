@@ -2,15 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const styles = makeStyles((theme) => ({
   root: {
-    width: 230,
+    width: 240,
   },
   header: {
-    borderBottom: `2px solid ${theme.palette.primary.main}`,
-    paddingBottom: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(1.25),
+    marginBottom: theme.spacing(1.25),
+    borderBottom: `1px solid ${theme.palette.divider}`,
   },
   title: {
-    fontWeight: 800,
+    fontWeight: 600,
     fontSize: '0.95rem',
     lineHeight: 1.2,
     letterSpacing: '0.01em',
@@ -25,10 +25,10 @@ const styles = makeStyles((theme) => ({
   detailRow: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(0.5),
+    marginTop: theme.spacing(0.75),
   },
   detailIcon: {
-    color: theme.palette.warning.main,
+    color: theme.palette.text.secondary,
     fontSize: '0.9rem',
     marginRight: theme.spacing(0.75),
     flexShrink: 0,
@@ -38,9 +38,13 @@ const styles = makeStyles((theme) => ({
     lineHeight: 1.3,
   },
   buttonWrapper: {
-    marginTop: theme.spacing(1),
-    paddingTop: theme.spacing(1),
+    marginTop: theme.spacing(1.5),
+    paddingTop: theme.spacing(1.25),
     borderTop: `1px solid ${theme.palette.divider}`,
+    '& .MuiButton-root': {
+      color: theme.palette.primary.main,
+      borderColor: theme.palette.divider,
+    },
   },
 }));
 

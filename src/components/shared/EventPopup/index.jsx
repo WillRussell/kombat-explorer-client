@@ -57,7 +57,7 @@ function EventPopup({ event }) {
 
       <div className={classes.buttonWrapper}>
         <Button
-          color="secondary"
+          color="primary"
           component={RouterLink(`/fights/${event.id}`)}
           endIcon={<ArrowForward />}
           size="small"

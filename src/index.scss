@@ -13,6 +13,7 @@ html {
 			"Helvetica Neue", sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
 		#root {
 			display: flex;
 			flex: 1;
@@ -22,5 +23,5 @@ html {
 }
 
 ::selection {
-	background: rgba(220, 38, 38, 0.3);
+	background: rgba(49, 92, 117, 0.24);
 }

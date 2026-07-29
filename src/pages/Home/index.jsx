@@ -29,16 +29,41 @@ function Home() {
 
   const disableInputs = isLoading || isError;
   const filteredCollection = filterSearch(eventsCollection, searchInput);
+  const eventDates = filteredCollection
+    .map((event) => moment(event.unixDate))
+    .filter((date) => date.isValid());
+  const earliestEventDate = eventDates.length > 0
+    ? moment.min(eventDates).format('MMM D, YYYY')
+    : null;
+  const latestEventDate = eventDates.length > 0
+    ? moment.max(eventDates).format('MMM D, YYYY')
+    : null;
 
   const listItems = filteredCollection.map((item) => (
-    <Paper className={classes.eventCard} key={item.id} elevation={3}>
+    <Paper className={classes.eventCard} key={item.id} elevation={0}>
       <div className={classes.cardContent}>
-        <Typography className={classes.cardTitle} component="h1" variant="h5">
-          {item.title}
-        </Typography>
-        <Typography className={classes.cardSubtitle} variant="body1">
-          {item.subtitle}
-        </Typography>
+        <div className={classes.cardHeader}>
+          <div className={classes.cardHeading}>
+            <Typography className={classes.cardTitle} component="h2" variant="h5">
+              {item.title}
+            </Typography>
+            <Typography className={classes.cardSubtitle} variant="body1">
+              {item.subtitle}
+            </Typography>
+          </div>
+          <Button
+            className={classes.viewButton}
+            color="primary"
+            component={RouterLink(`/fights/${item.id}`)}
+            disableElevation
+            endIcon={<ArrowForward />}
+            size="medium"
+            variant="contained"
+          >
+            View Event
+          </Button>
+        </div>
+
         <EventVenue venue={item.locationDetails.venue} />
         <EventLocation location={item.locationDetails.shortLocation} />
         <EventDate
@@ -46,18 +71,6 @@ function Home() {
             item.unixDate,
           ).format('LL')}`}
         />
-      </div>
-
-      <div className={classes.cardActions}>
-        <Button
-          color="secondary"
-          component={RouterLink(`/fights/${item.id}`)}
-          endIcon={<ArrowForward />}
-          size="medium"
-          variant="outlined"
-        >
-          View Event
-        </Button>
       </div>
     </Paper>
   ));
@@ -102,8 +115,36 @@ function Home() {
 
   return (
     <div className={classes.root}>
-      {eventsCollection.length > 0 && (
-        <Container maxWidth="lg">
+      <Container maxWidth="lg">
+        <div className={classes.pageHeader}>
+          <div>
+            <Typography className={classes.eyebrow} component="p" variant="overline">
+              Fight calendar
+            </Typography>
+            <Typography className={classes.pageTitle} component="h1" variant="h4">
+              Upcoming events
+            </Typography>
+            <Typography color="textSecondary" variant="body1">
+              Browse boxing and MMA cards around the world.
+            </Typography>
+          </div>
+          {eventsCollection.length > 0 && (
+            <div className={classes.headerSummary}>
+              <Typography className={classes.eventCount} color="textSecondary" variant="body2">
+                {`${filteredCollection.length} ${filteredCollection.length === 1 ? 'event' : 'events'}`}
+              </Typography>
+              {earliestEventDate && latestEventDate && (
+                <Typography className={classes.dateRange} component="p" variant="body2">
+                  {earliestEventDate === latestEventDate
+                    ? earliestEventDate
+                    : `${earliestEventDate} – ${latestEventDate}`}
+                </Typography>
+              )}
+            </div>
+          )}
+        </div>
+
+        {eventsCollection.length > 0 && (
           <div className={classes.titleArea}>
             <div className={classes.titleActions}>
               <FilterSearchbar disabled={disableInputs} setInput={setInput} />
@@ -114,8 +155,8 @@ function Home() {
               />
             </div>
           </div>
-        </Container>
-      )}
+        )}
+      </Container>
 
       {activeContent()}
     </div>
