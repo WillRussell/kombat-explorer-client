@@ -10,7 +10,16 @@ import useStyles from './styles';
 
 function EventGroupPopup({ events }) {
   const classes = useStyles();
-  const location = events[0].locationDetails.shortLocation;
+  const uniqueLocations = [...new Set(events
+    .map((event) => event.locationDetails.shortLocation)
+    .filter(Boolean))];
+  const uniqueCountries = [...new Set(events
+    .map((event) => event.locationDetails.country)
+    .filter(Boolean))];
+  const isApproximateLocation = uniqueLocations.length > 1;
+  const location = isApproximateLocation && uniqueCountries.length === 1
+    ? uniqueCountries[0]
+    : uniqueLocations[0] || 'Multiple locations';
 
   return (
     <div className={classes.root}>
@@ -21,13 +30,21 @@ function EventGroupPopup({ events }) {
         <Typography className={classes.location} variant="subtitle1">
           {location}
         </Typography>
+        {isApproximateLocation && (
+          <Typography className={classes.locationNote} variant="caption">
+            Approximate map point
+          </Typography>
+        )}
       </div>
 
       <div className={classes.eventList}>
         {events.map((event) => (
           <Button
             className={classes.eventButton}
-            component={RouterLink(`/fights/${event.id}`)}
+            component={RouterLink({
+              pathname: `/fights/${event.id}`,
+              state: { source: 'map' },
+            })}
             endIcon={<ArrowForward />}
             key={event.id}
           >
@@ -50,6 +67,7 @@ EventGroupPopup.propTypes = {
     title: PropTypes.string.isRequired,
     unixDate: PropTypes.number.isRequired,
     locationDetails: PropTypes.shape({
+      country: PropTypes.string,
       shortLocation: PropTypes.string,
     }).isRequired,
   })).isRequired,

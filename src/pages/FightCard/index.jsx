@@ -16,7 +16,7 @@ import useFetchFightCard from 'hooks/useFetchFightCard';
 import { get } from 'lodash';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import RouterLink from '../../router/RouterLink';
 import useStyles from './styles';
@@ -24,9 +24,13 @@ import useStyles from './styles';
 function FightCard() {
   const classes = useStyles();
   const { id } = useParams();
+  const location = useLocation();
   const [isRaw, setIsRaw] = useState(false);
   const [{ fightCard, isLoading, isError }] = useFetchFightCard(id);
   const fights = get(fightCard, 'fights', []);
+  const cameFromMap = get(location, 'state.source') === 'map';
+  const backDestination = cameFromMap ? '/map' : '/';
+  const backLabel = cameFromMap ? 'Back to map' : 'Back to events';
 
   // TODO: handle this check the server instead of the client
   const hasMainEvent = fights.length >= 1
@@ -101,10 +105,10 @@ function FightCard() {
         <Button
           className={classes.backButton}
           color="primary"
-          component={RouterLink('/')}
+          component={RouterLink(backDestination)}
           startIcon={<ArrowBack />}
         >
-          Back to events
+          {backLabel}
         </Button>
       </Container>
 

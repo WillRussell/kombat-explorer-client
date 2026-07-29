@@ -23,6 +23,12 @@ const styles = makeStyles((theme) => ({
     fontWeight: 600,
     lineHeight: 1.25,
   },
+  locationNote: {
+    display: 'block',
+    marginTop: theme.spacing(0.25),
+    color: theme.palette.text.secondary,
+    fontSize: '0.68rem',
+  },
   eventList: {
     maxHeight: 260,
     overflowY: 'auto',

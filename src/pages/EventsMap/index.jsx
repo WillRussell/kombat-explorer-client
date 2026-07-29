@@ -11,7 +11,7 @@ import useFetchEvents from 'hooks/useFetchEvents';
 import L from 'leaflet';
 import React from 'react';
 import {
-  Map as LeafletMap, Marker, Popup, TileLayer,
+  Map as LeafletMap, Marker, Popup, TileLayer, ZoomControl,
 } from 'react-leaflet';
 
 import { getEventCoordinates } from '../../support/eventCoordinates';
@@ -113,7 +113,13 @@ function EventsMap() {
             </Typography>
           </div>
 
-          <LeafletMap center={[25, 0]} zoom={3} scrollWheelZoom zoomControl>
+          <LeafletMap
+            center={[25, 0]}
+            scrollWheelZoom
+            zoom={3}
+            zoomControl={false}
+          >
+            <ZoomControl position="bottomleft" />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

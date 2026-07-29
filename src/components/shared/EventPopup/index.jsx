@@ -58,7 +58,10 @@ function EventPopup({ event }) {
       <div className={classes.buttonWrapper}>
         <Button
           color="primary"
-          component={RouterLink(`/fights/${event.id}`)}
+          component={RouterLink({
+            pathname: `/fights/${event.id}`,
+            state: { source: 'map' },
+          })}
           disableElevation
           endIcon={<ArrowForward />}
           size="small"

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:kombat-explorer-api.s3-us-west-2.amazonaws.com)",
+      "Bash(yarn add react-leaflet@2 leaflet 2>&1)",
+      "Bash(yarn lint --fix 2>&1)"
+    ]
+  }
+}

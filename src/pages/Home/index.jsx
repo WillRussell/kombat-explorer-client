@@ -54,7 +54,10 @@ function Home() {
           <Button
             className={classes.viewButton}
             color="primary"
-            component={RouterLink(`/fights/${item.id}`)}
+            component={RouterLink({
+              pathname: `/fights/${item.id}`,
+              state: { source: 'events' },
+            })}
             disableElevation
             endIcon={<ArrowForward />}
             size="medium"
