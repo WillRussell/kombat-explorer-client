@@ -31,6 +31,24 @@ const styles = makeStyles((theme) => ({
     flex: 1,
     alignItems: 'center',
     minWidth: 0,
+    color: 'inherit',
+    textDecoration: 'none',
+    '&:focus': {
+      outline: 'none',
+    },
+    '&:focus-visible': {
+      borderRadius: 8,
+      boxShadow: `0 0 0 3px ${theme.palette.type === 'dark'
+        ? 'rgba(143, 183, 204, 0.22)'
+        : 'rgba(49, 92, 117, 0.18)'}`,
+    },
+    '&:hover $brandMark': {
+      backgroundColor: theme.palette.primary.dark,
+      transform: 'translateY(-1px)',
+    },
+    '&:hover $brandText': {
+      color: theme.palette.primary.main,
+    },
   },
   brandMark: {
     display: 'grid',
@@ -44,11 +62,13 @@ const styles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     fontSize: '0.9rem',
     fontWeight: 700,
+    transition: 'background-color 0.2s ease, transform 0.2s ease',
   },
   brandText: {
     fontSize: '1rem',
     fontWeight: 650,
     letterSpacing: '-0.015em',
+    transition: 'color 0.2s ease',
   },
   navLinks: {
     display: 'flex',

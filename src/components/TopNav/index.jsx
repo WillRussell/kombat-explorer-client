@@ -18,12 +18,16 @@ function TopNav() {
   return (
     <AppBar className={classes.appBar} elevation={0} position="sticky">
       <Toolbar className={classes.toolbar}>
-        <div className={classes.brand}>
+        <a
+          aria-label="Kombat Explorer home"
+          className={classes.brand}
+          href="/"
+        >
           <div className={classes.brandMark} aria-hidden="true">K</div>
           <Typography className={`${classes.grow} ${classes.brandText}`} noWrap variant="h6">
             Kombat Explorer
           </Typography>
-        </div>
+        </a>
         <div className={classes.navLinks}>
           <Button
             className={`${classes.navLink} ${location.pathname === '/' ? classes.navLinkActive : ''}`}

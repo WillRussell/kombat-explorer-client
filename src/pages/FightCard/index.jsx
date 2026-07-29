@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import PersonIcon from '@material-ui/icons/Person';
+import SportsMmaIcon from '@material-ui/icons/SportsMma';
 import ErrorMessage from 'components/shared/ErrorMessage';
 import EventDate from 'components/shared/EventDate';
 import EventVenue from 'components/shared/EventVenue';
@@ -21,6 +22,11 @@ import { useLocation, useParams } from 'react-router-dom';
 import RouterLink from '../../router/RouterLink';
 import useStyles from './styles';
 
+const isAnnouncedFight = (fight) => (
+  get(fight, 'fighterOne.name', '').trim() !== ''
+  && get(fight, 'fighterTwo.name', '').trim() !== ''
+);
+
 function FightCard() {
   const classes = useStyles();
   const { id } = useParams();
@@ -31,11 +37,12 @@ function FightCard() {
   const cameFromMap = get(location, 'state.source') === 'map';
   const backDestination = cameFromMap ? '/map' : '/';
   const backLabel = cameFromMap ? 'Back to map' : 'Back to events';
+  const hasFightCard = Object.keys(fightCard).length > 0;
+  const announcedFights = fights.filter(isAnnouncedFight);
 
   // TODO: handle this check the server instead of the client
-  const hasMainEvent = fights.length >= 1
-  && Object.values(fights[0].fighterOne).every((val) => val !== '')
-  && Object.values(fights[0].fighterTwo).every((val) => val !== '');
+  const hasMainEvent = fights.length >= 1 && isAnnouncedFight(fights[0]);
+  const hasPartialLineup = announcedFights.length > 0 && !hasMainEvent;
 
   const getFighterAvatar = (fighter) => (
     <div className={classes.avatarSection}>
@@ -53,7 +60,7 @@ function FightCard() {
     </div>
   );
 
-  const listItems = fights.map((item, index) => (
+  const listItems = announcedFights.map((item, index) => (
     <Paper
       className={classes.fightContainer}
       key={item.fightName}
@@ -118,7 +125,7 @@ function FightCard() {
         <ErrorMessage message="There was an error fetching the fight card." />
       )}
 
-      {fights.length > 0 && (
+      {hasFightCard && !isError && (
         <Container className={classes.paperWrapper} maxWidth="md">
           <div className={classes.headerContainer}>
             <div>
@@ -134,21 +141,46 @@ function FightCard() {
               />
             </div>
             <div className={classes.headerAction}>
-              <Typography color="textSecondary" variant="body2">
-                {`${fights.length} ${fights.length === 1 ? 'bout' : 'bouts'}`}
-              </Typography>
-              <RawToggleSwitch
-                isRaw={isRaw}
-                setIsRaw={setIsRaw}
-                disabled={isLoading}
-              />
+              {announcedFights.length > 0 && (
+                <Typography color="textSecondary" variant="body2">
+                  {`${announcedFights.length} ${announcedFights.length === 1 ? 'bout' : 'bouts'}`}
+                </Typography>
+              )}
+              {fights.length > 0 && (
+                <RawToggleSwitch
+                  isRaw={isRaw}
+                  setIsRaw={setIsRaw}
+                  disabled={isLoading}
+                />
+              )}
             </div>
           </div>
 
           <div>
-            {isRaw && <RawDataView data={fights} />}
+            {isRaw && fights.length > 0 && <RawDataView data={fights} />}
             {!isRaw && hasMainEvent && <div>{listItems}</div>}
-            {!isRaw && !hasMainEvent && <ErrorMessage message="This card doesn't have a main event yet." />}
+            {(!isRaw || fights.length === 0) && !hasMainEvent && (
+              <Paper
+                className={classes.emptyState}
+                component="section"
+                elevation={0}
+              >
+                <div className={classes.emptyStateIcon} aria-hidden="true">
+                  <SportsMmaIcon />
+                </div>
+                <Typography className={classes.emptyStateEyebrow} component="p" variant="overline">
+                  Lineup pending
+                </Typography>
+                <Typography className={classes.emptyStateTitle} component="h2" variant="h5">
+                  {hasPartialLineup ? 'Main event not announced' : 'Fight card coming soon'}
+                </Typography>
+                <Typography className={classes.emptyStateCopy} color="textSecondary" variant="body2">
+                  {hasPartialLineup
+                    ? "This card doesn't have a main event yet. Check back as the lineup is finalized."
+                    : 'No bouts have been announced for this event yet. Check back closer to fight night.'}
+                </Typography>
+              </Paper>
+            )}
           </div>
         </Container>
       )}

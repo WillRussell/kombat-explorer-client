@@ -65,6 +65,59 @@ const styles = makeStyles((theme) => {
           : '0 8px 24px rgba(23, 36, 44, 0.07)',
       },
     },
+    emptyState: {
+      display: 'flex',
+      minHeight: 260,
+      padding: theme.spacing(5, 3),
+      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      backgroundColor: isDark
+        ? 'rgba(143, 183, 204, 0.035)'
+        : 'rgba(49, 92, 117, 0.025)',
+      border: `1px dashed ${isDark ? '#34454E' : '#CCD8DE'}`,
+      borderRadius: 12,
+      textAlign: 'center',
+      [theme.breakpoints.down('xs')]: {
+        minHeight: 230,
+        padding: theme.spacing(4, 2),
+      },
+    },
+    emptyStateIcon: {
+      display: 'grid',
+      width: 64,
+      height: 64,
+      marginBottom: theme.spacing(2),
+      placeItems: 'center',
+      color: theme.palette.primary.main,
+      backgroundColor: isDark
+        ? 'rgba(143, 183, 204, 0.12)'
+        : 'rgba(49, 92, 117, 0.09)',
+      border: `1px solid ${isDark
+        ? 'rgba(143, 183, 204, 0.2)'
+        : 'rgba(49, 92, 117, 0.12)'}`,
+      borderRadius: '50%',
+      '& svg': {
+        fontSize: 30,
+      },
+    },
+    emptyStateEyebrow: {
+      marginBottom: theme.spacing(0.5),
+      color: theme.palette.primary.main,
+      fontSize: '0.68rem',
+      fontWeight: 700,
+      letterSpacing: '0.1em',
+      lineHeight: 1.5,
+    },
+    emptyStateTitle: {
+      marginBottom: theme.spacing(1),
+      fontSize: '1.25rem',
+      fontWeight: 650,
+    },
+    emptyStateCopy: {
+      maxWidth: 430,
+      lineHeight: 1.65,
+    },
     boutHeader: {
       display: 'flex',
       alignItems: 'center',
