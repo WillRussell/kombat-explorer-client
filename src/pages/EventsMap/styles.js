@@ -110,6 +110,15 @@ const styles = makeStyles((theme) => ({
       boxShadow: '0 4px 14px rgba(20, 42, 54, 0.45)',
       transform: 'scale(1.12)',
     },
+    '& .event-marker-icon:focus': {
+      outline: 'none',
+    },
+    '& .event-marker-icon:focus .event-marker-dot': {
+      boxShadow: `0 0 0 4px ${theme.palette.type === 'dark'
+        ? 'rgba(143, 183, 204, 0.3)'
+        : 'rgba(49, 92, 117, 0.24)'}, 0 4px 14px rgba(20, 42, 54, 0.35)`,
+      transform: 'scale(1.12)',
+    },
     '& .leaflet-control-zoom': {
       overflow: 'hidden',
       border: '0 !important',
@@ -166,6 +175,42 @@ const styles = makeStyles((theme) => ({
       },
     },
   },
+  resetMapButton: {
+    position: 'absolute',
+    zIndex: 500,
+    top: theme.spacing(1.5),
+    left: theme.spacing(1.5),
+    minHeight: 36,
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.type === 'dark'
+      ? 'rgba(24, 32, 37, 0.92)'
+      : 'rgba(255, 255, 255, 0.92)',
+    border: `1px solid ${theme.palette.divider}`,
+    boxShadow: '0 6px 18px rgba(20, 42, 54, 0.15)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    '&:hover': {
+      color: theme.palette.primary.main,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: '0 8px 22px rgba(20, 42, 54, 0.2)',
+    },
+    [theme.breakpoints.down('xs')]: {
+      top: theme.spacing(1),
+      left: theme.spacing(1),
+      width: 38,
+      minWidth: 38,
+      padding: 0,
+      '& .MuiButton-label': {
+        fontSize: 0,
+      },
+      '& .MuiButton-startIcon': {
+        margin: 0,
+        '& svg': {
+          fontSize: '1.15rem',
+        },
+      },
+    },
+  },
   mapLegend: {
     position: 'absolute',
     zIndex: 500,
@@ -187,7 +232,7 @@ const styles = makeStyles((theme) => ({
       top: theme.spacing(1),
       right: theme.spacing(1),
       minWidth: 0,
-      maxWidth: 'calc(100% - 72px)',
+      maxWidth: 'calc(100% - 64px)',
     },
   },
   legendLine: {
@@ -213,6 +258,9 @@ const styles = makeStyles((theme) => ({
     marginTop: theme.spacing(0.5),
     color: theme.palette.text.secondary,
     fontSize: '0.66rem',
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
 }));
 

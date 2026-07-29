@@ -23,12 +23,13 @@ import useStyles from './styles';
 
 function Home() {
   const classes = useStyles();
-  const [searchInput, setInput] = useState();
+  const [searchInput, setInput] = useState('');
   const [isRaw, setIsRaw] = useState(false);
   const [{ eventsCollection, isLoading, isError }] = useFetchEvents();
 
   const disableInputs = isLoading || isError;
   const filteredCollection = filterSearch(eventsCollection, searchInput);
+  const hasActiveFilters = Boolean(searchInput);
   const eventDates = filteredCollection
     .map((event) => moment(event.unixDate))
     .filter((date) => date.isValid());
@@ -38,6 +39,9 @@ function Home() {
   const latestEventDate = eventDates.length > 0
     ? moment.max(eventDates).format('MMM D, YYYY')
     : null;
+  const clearFilters = () => {
+    setInput('');
+  };
 
   const listItems = filteredCollection.map((item) => (
     <Paper className={classes.eventCard} key={item.id} elevation={0}>
@@ -52,6 +56,7 @@ function Home() {
             </Typography>
           </div>
           <Button
+            aria-label={`View ${item.name || item.title}`}
             className={classes.viewButton}
             color="primary"
             component={RouterLink({
@@ -80,7 +85,7 @@ function Home() {
 
   const activeContent = () => {
     if (isLoading) {
-      return <LoadingCircle />;
+      return <LoadingCircle label="Loading events" />;
     }
 
     if (isError) {
@@ -107,11 +112,25 @@ function Home() {
 
     return (
       <div className={classes.noResults}>
-        <SearchOff className={classes.noResultsIcon} />
-        <Typography variant="h6">No events found</Typography>
-        <Typography variant="body2" color="textSecondary">
-          Try adjusting your search terms
+        <div className={classes.noResultsIcon} aria-hidden="true">
+          <SearchOff />
+        </div>
+        <Typography className={classes.noResultsTitle} variant="h6">
+          No events match these filters
         </Typography>
+        <Typography className={classes.noResultsCopy} variant="body2" color="textSecondary">
+          Try another search or clear the active filters to see the full calendar.
+        </Typography>
+        {hasActiveFilters && (
+          <Button
+            className={classes.clearResultsButton}
+            color="primary"
+            onClick={clearFilters}
+            variant="outlined"
+          >
+            Clear filters
+          </Button>
+        )}
       </div>
     );
   };
@@ -150,7 +169,11 @@ function Home() {
         {eventsCollection.length > 0 && (
           <div className={classes.titleArea}>
             <div className={classes.titleActions}>
-              <FilterSearchbar disabled={disableInputs} setInput={setInput} />
+              <FilterSearchbar
+                disabled={disableInputs}
+                setInput={setInput}
+                value={searchInput}
+              />
               <RawToggleSwitch
                 isRaw={isRaw}
                 setIsRaw={setIsRaw}

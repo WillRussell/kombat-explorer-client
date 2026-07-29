@@ -1,15 +1,17 @@
 import 'leaflet/dist/leaflet.css';
 
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 import ErrorMessage from 'components/shared/ErrorMessage';
 import EventGroupPopup from 'components/shared/EventGroupPopup';
 import EventPopup from 'components/shared/EventPopup';
 import LoadingCircle from 'components/shared/LoadingCircle';
 import useFetchEvents from 'hooks/useFetchEvents';
 import L from 'leaflet';
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Map as LeafletMap, Marker, Popup, TileLayer, ZoomControl,
 } from 'react-leaflet';
@@ -18,6 +20,11 @@ import { getEventCoordinates } from '../../support/eventCoordinates';
 import useStyles from './styles';
 
 const markerIconCache = {};
+const defaultMapView = {
+  center: [25, 0],
+  zoom: 3,
+};
+let savedMapView = defaultMapView;
 
 const getEventMarkerIcon = (eventCount) => {
   if (!markerIconCache[eventCount]) {
@@ -36,10 +43,20 @@ const getEventMarkerIcon = (eventCount) => {
 
 function EventsMap() {
   const classes = useStyles();
+  const mapRef = useRef(null);
   const [{ eventsCollection, isLoading, isError }] = useFetchEvents();
 
+  const resetMapView = () => {
+    const map = mapRef.current && mapRef.current.leafletElement;
+    savedMapView = defaultMapView;
+
+    if (map) {
+      map.setView(defaultMapView.center, defaultMapView.zoom);
+    }
+  };
+
   if (isLoading) {
-    return <LoadingCircle />;
+    return <LoadingCircle label="Loading event map" />;
   }
 
   if (isError) {
@@ -101,6 +118,15 @@ function EventsMap() {
         </div>
 
         <div className={classes.mapWrapper}>
+          <Button
+            aria-label="Reset map view"
+            className={classes.resetMapButton}
+            onClick={resetMapView}
+            startIcon={<CenterFocusStrongIcon />}
+            variant="contained"
+          >
+            Reset view
+          </Button>
           <div className={classes.mapLegend}>
             <div className={classes.legendLine}>
               <span className={classes.legendMarker} />
@@ -114,9 +140,13 @@ function EventsMap() {
           </div>
 
           <LeafletMap
-            center={[25, 0]}
+            center={savedMapView.center}
+            onViewportChanged={(viewport) => {
+              savedMapView = viewport;
+            }}
+            ref={mapRef}
             scrollWheelZoom
-            zoom={3}
+            zoom={savedMapView.zoom}
             zoomControl={false}
           >
             <ZoomControl position="bottomleft" />

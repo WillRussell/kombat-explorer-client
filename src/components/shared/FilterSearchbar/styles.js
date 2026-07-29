@@ -27,6 +27,18 @@ const styles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },
   },
+  clearButton: {
+    width: 30,
+    height: 30,
+    color: theme.palette.text.secondary,
+    '& svg': {
+      fontSize: '1rem',
+    },
+    '&:hover': {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
 }));
 
 export default styles;

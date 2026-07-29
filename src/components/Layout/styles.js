@@ -12,9 +12,9 @@ const styles = makeStyles((theme) => ({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(4, 2, 7),
+    padding: theme.spacing(4, 0, 7),
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(6, 3, 9),
+      padding: theme.spacing(6, 0, 9),
     },
   },
 }));

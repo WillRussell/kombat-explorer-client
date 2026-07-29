@@ -16,7 +16,7 @@ const styles = makeStyles((theme) => ({
   },
   toolbar: {
     width: '100%',
-    maxWidth: 1200,
+    maxWidth: 1280,
     minHeight: 64,
     margin: '0 auto',
     paddingLeft: theme.spacing(2),
@@ -76,6 +76,7 @@ const styles = makeStyles((theme) => ({
     gap: theme.spacing(0.5),
   },
   navLink: {
+    position: 'relative',
     minWidth: 0,
     minHeight: 38,
     color: theme.palette.text.secondary,
@@ -86,6 +87,11 @@ const styles = makeStyles((theme) => ({
     '&:hover': {
       color: theme.palette.text.primary,
       backgroundColor: theme.palette.action.hover,
+    },
+    '&.Mui-focusVisible': {
+      boxShadow: `0 0 0 3px ${theme.palette.type === 'dark'
+        ? 'rgba(143, 183, 204, 0.22)'
+        : 'rgba(49, 92, 117, 0.18)'}`,
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(0.75),
@@ -106,6 +112,16 @@ const styles = makeStyles((theme) => ({
       backgroundColor: theme.palette.type === 'dark'
         ? 'rgba(143, 183, 204, 0.18)'
         : theme.palette.primary.light,
+    },
+    '&:after': {
+      position: 'absolute',
+      right: 10,
+      bottom: 3,
+      left: 10,
+      height: 2,
+      content: '""',
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: 999,
     },
   },
   navIcon: {

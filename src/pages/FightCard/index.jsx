@@ -44,8 +44,8 @@ function FightCard() {
   const hasMainEvent = fights.length >= 1 && isAnnouncedFight(fights[0]);
   const hasPartialLineup = announcedFights.length > 0 && !hasMainEvent;
 
-  const getFighterAvatar = (fighter) => (
-    <div className={classes.avatarSection}>
+  const getFighterAvatar = (fighter, isRight = false) => (
+    <div className={`${classes.avatarSection} ${isRight ? classes.avatarSectionRight : ''}`}>
       <Avatar className={classes.avatar}>
         <PersonIcon />
       </Avatar>
@@ -54,7 +54,7 @@ function FightCard() {
           {fighter.name}
         </Typography>
         <Typography className={classes.fighterRecord} variant="caption">
-          {fighter.record}
+          {fighter.record || 'Record unavailable'}
         </Typography>
       </div>
     </div>
@@ -71,7 +71,7 @@ function FightCard() {
           {index === 0 ? 'Main event' : `Bout ${index + 1}`}
         </Typography>
         {item.fightName && (
-          <Typography color="textSecondary" variant="caption">
+          <Typography className={classes.boutName} color="textSecondary" variant="caption">
             {item.fightName}
           </Typography>
         )}
@@ -99,7 +99,7 @@ function FightCard() {
 
         <Grid item xs={12} sm={5}>
           <div className={classes.cardRight}>
-            {getFighterAvatar(item.fighterTwo)}
+            {getFighterAvatar(item.fighterTwo, true)}
           </div>
         </Grid>
       </Grid>
@@ -119,7 +119,7 @@ function FightCard() {
         </Button>
       </Container>
 
-      {isLoading && <LoadingCircle />}
+      {isLoading && <LoadingCircle label="Loading fight card" />}
 
       {isError && (
         <ErrorMessage message="There was an error fetching the fight card." />
@@ -128,7 +128,7 @@ function FightCard() {
       {hasFightCard && !isError && (
         <Container className={classes.paperWrapper} maxWidth="md">
           <div className={classes.headerContainer}>
-            <div>
+            <div className={classes.headerDetails}>
               <Typography className={classes.eyebrow} component="p" variant="overline">
                 Fight card
               </Typography>
@@ -142,7 +142,7 @@ function FightCard() {
             </div>
             <div className={classes.headerAction}>
               {announcedFights.length > 0 && (
-                <Typography color="textSecondary" variant="body2">
+                <Typography className={classes.boutCount} color="textSecondary" variant="body2">
                   {`${announcedFights.length} ${announcedFights.length === 1 ? 'bout' : 'bouts'}`}
                 </Typography>
               )}

@@ -35,6 +35,9 @@ const styles = makeStyles((theme) => {
         gap: theme.spacing(2),
       },
     },
+    headerDetails: {
+      minWidth: 0,
+    },
     eyebrow: {
       marginBottom: theme.spacing(0.5),
       color: theme.palette.primary.main,
@@ -51,6 +54,18 @@ const styles = makeStyles((theme) => {
       alignItems: 'center',
       flexShrink: 0,
       gap: theme.spacing(1),
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        justifyContent: 'space-between',
+      },
+    },
+    boutCount: {
+      padding: theme.spacing(0.65, 1.1),
+      backgroundColor: theme.palette.background.paper,
+      border: `1px solid ${theme.palette.divider}`,
+      borderRadius: 999,
+      fontSize: '0.76rem',
+      fontWeight: 600,
     },
     fightContainer: {
       marginBottom: theme.spacing(2),
@@ -63,6 +78,9 @@ const styles = makeStyles((theme) => {
         boxShadow: isDark
           ? '0 8px 24px rgba(0, 0, 0, 0.16)'
           : '0 8px 24px rgba(23, 36, 44, 0.07)',
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(0, 2, 2.5),
       },
     },
     emptyState: {
@@ -130,6 +148,12 @@ const styles = makeStyles((theme) => {
       color: theme.palette.primary.main,
       fontWeight: 700,
     },
+    boutName: {
+      overflow: 'hidden',
+      textAlign: 'right',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    },
     avatarSection: {
       display: 'flex',
       alignItems: 'center',
@@ -138,6 +162,22 @@ const styles = makeStyles((theme) => {
         justifyContent: 'center',
         padding: theme.spacing(2, 0),
         textAlign: 'center',
+      },
+    },
+    avatarSectionRight: {
+      flexDirection: 'row-reverse',
+      textAlign: 'right',
+      '& $fighterinfo': {
+        marginRight: theme.spacing(1.5),
+        marginLeft: 0,
+      },
+      [theme.breakpoints.down('xs')]: {
+        flexDirection: 'row',
+        textAlign: 'center',
+        '& $fighterinfo': {
+          marginRight: 0,
+          marginLeft: theme.spacing(1.5),
+        },
       },
     },
     avatar: {
@@ -149,10 +189,12 @@ const styles = makeStyles((theme) => {
         : theme.palette.primary.light,
     },
     fighterinfo: {
+      minWidth: 0,
       marginLeft: theme.spacing(1.5),
     },
     fighterName: {
       fontSize: '1.05rem',
+      overflowWrap: 'anywhere',
     },
     fighterRecord: {
       color: theme.palette.text.secondary,
@@ -183,6 +225,9 @@ const styles = makeStyles((theme) => {
       flex: 1,
       flexDirection: 'column',
       alignItems: 'center',
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(0.25, 0),
+      },
     },
     cardRight: {
       display: 'flex',

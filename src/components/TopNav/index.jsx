@@ -30,16 +30,22 @@ function TopNav() {
         </a>
         <div className={classes.navLinks}>
           <Button
+            aria-current={location.pathname === '/' ? 'page' : undefined}
+            aria-label="Events"
             className={`${classes.navLink} ${location.pathname === '/' ? classes.navLinkActive : ''}`}
             component={RouterLink('/')}
             startIcon={<ViewListIcon className={classes.navIcon} />}
+            title="Events"
           >
             Events
           </Button>
           <Button
+            aria-current={location.pathname === '/map' ? 'page' : undefined}
+            aria-label="Map"
             className={`${classes.navLink} ${location.pathname === '/map' ? classes.navLinkActive : ''}`}
             component={RouterLink('/map')}
             startIcon={<MapIcon className={classes.navIcon} />}
+            title="Map"
           >
             Map
           </Button>

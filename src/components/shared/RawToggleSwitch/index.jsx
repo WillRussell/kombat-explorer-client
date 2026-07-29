@@ -20,7 +20,13 @@ function RawToggleSwitch({ isRaw, setIsRaw, disabled }) {
       <FormGroup>
         <FormControlLabel
           value="start"
-          control={<Switch checked={isRaw} onChange={() => setIsRaw(!isRaw)} />}
+          control={(
+            <Switch
+              checked={isRaw}
+              onChange={() => setIsRaw(!isRaw)}
+              size="small"
+            />
+          )}
           label="Raw data"
           labelPlacement="start"
         />

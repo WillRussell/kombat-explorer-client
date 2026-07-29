@@ -108,6 +108,18 @@ export const lightTheme = createTheme({
         body: {
           backgroundColor: '#F5F7F8',
         },
+        '::selection': {
+          color: '#17242C',
+          backgroundColor: '#CADDE7',
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          '*, *::before, *::after': {
+            scrollBehavior: 'auto !important',
+            animationDuration: '0.01ms !important',
+            animationIterationCount: '1 !important',
+            transitionDuration: '0.01ms !important',
+          },
+        },
       },
     },
   },
@@ -154,6 +166,18 @@ export const darkTheme = createTheme({
       '@global': {
         body: {
           backgroundColor: '#101518',
+        },
+        '::selection': {
+          color: '#10212A',
+          backgroundColor: '#8FB7CC',
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          '*, *::before, *::after': {
+            scrollBehavior: 'auto !important',
+            animationDuration: '0.01ms !important',
+            animationIterationCount: '1 !important',
+            transitionDuration: '0.01ms !important',
+          },
         },
       },
     },

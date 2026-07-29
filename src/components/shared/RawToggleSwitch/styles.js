@@ -12,6 +12,9 @@ const styles = makeStyles((theme) => ({
       fontSize: '0.8rem',
       fontWeight: 500,
     },
+    '& .MuiSwitch-root': {
+      marginLeft: theme.spacing(0.5),
+    },
     '& .MuiSwitch-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main,
     },

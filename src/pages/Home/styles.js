@@ -79,6 +79,7 @@ const styles = makeStyles((theme) => {
       },
     },
     eventCard: {
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       minHeight: 220,
@@ -86,11 +87,38 @@ const styles = makeStyles((theme) => {
       border: `1px solid ${theme.palette.divider}`,
       boxShadow: isDark ? 'none' : '0 1px 2px rgba(23, 36, 44, 0.03)',
       transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
+      '&:before': {
+        position: 'absolute',
+        top: 18,
+        bottom: 18,
+        left: 0,
+        width: 3,
+        content: '""',
+        backgroundColor: theme.palette.primary.main,
+        borderRadius: '0 3px 3px 0',
+        opacity: 0,
+        transform: 'scaleY(0.65)',
+        transition: 'opacity 0.2s ease, transform 0.2s ease',
+      },
       '&:hover': {
         borderColor: theme.palette.type === 'dark' ? '#40515A' : '#CAD5DB',
         boxShadow: isDark
           ? '0 8px 24px rgba(0, 0, 0, 0.16)'
           : '0 8px 24px rgba(23, 36, 44, 0.07)',
+        '&:before': {
+          opacity: 1,
+          transform: 'scaleY(1)',
+        },
+      },
+      '&:focus-within': {
+        borderColor: theme.palette.primary.main,
+        boxShadow: `0 0 0 3px ${isDark
+          ? 'rgba(143, 183, 204, 0.16)'
+          : 'rgba(49, 92, 117, 0.12)'}`,
+        '&:before': {
+          opacity: 1,
+          transform: 'scaleY(1)',
+        },
       },
     },
     cardContent: {
@@ -178,19 +206,47 @@ const styles = makeStyles((theme) => {
     },
     noResults: {
       display: 'flex',
-      flex: 1,
+      width: 'calc(100% - 32px)',
+      maxWidth: 1232,
+      minHeight: 300,
+      margin: '0 auto',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: theme.spacing(6),
+      padding: theme.spacing(6, 3),
       color: theme.palette.text.secondary,
+      backgroundColor: isDark
+        ? 'rgba(143, 183, 204, 0.025)'
+        : 'rgba(49, 92, 117, 0.02)',
+      border: `1px dashed ${isDark ? '#34454E' : '#CCD8DE'}`,
+      borderRadius: 12,
       textAlign: 'center',
     },
     noResultsIcon: {
-      fontSize: '3rem',
+      display: 'grid',
+      width: 58,
+      height: 58,
       marginBottom: theme.spacing(2),
-      color: theme.palette.text.secondary,
-      opacity: 0.5,
+      placeItems: 'center',
+      color: theme.palette.primary.main,
+      backgroundColor: isDark
+        ? 'rgba(143, 183, 204, 0.1)'
+        : 'rgba(49, 92, 117, 0.08)',
+      borderRadius: '50%',
+      '& svg': {
+        fontSize: '1.7rem',
+      },
+    },
+    noResultsTitle: {
+      color: theme.palette.text.primary,
+      marginBottom: theme.spacing(0.75),
+    },
+    noResultsCopy: {
+      maxWidth: 430,
+      lineHeight: 1.6,
+    },
+    clearResultsButton: {
+      marginTop: theme.spacing(2.5),
     },
   };
 });
