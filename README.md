@@ -1,38 +1,68 @@
+# Kombat Explorer
 
-# Kombat Explorer Client
+React app that reads from [kombat-explorer-api](https://github.com/WillRussell/kombat-explorer-api). A UI layer to browse/search upcoming events, view events on an interactive world map, and inspect fight cards. 
 
-A front-end React app that reads from [kombat-explorer-api](https://github.com/facebook/create-react-app). This is a ui to explore upcoming boxing & mma events.
+[View live demo](https://d20l0qhspqmr91.cloudfront.net)
 
-#### [Live Demo](https://d20l0qhspqmr91.cloudfront.net)
+## Screens
 
-<img width="400" alt="Screen Shot 2023-05-10 at 1 05 45 PM" src="https://github.com/WillRussell/kombat-explorer-client/assets/8751625/ec2c4582-2373-4455-a847-525925a2d880">
+### Events Calendar
 
+<img width="500" alt="Kombat Explorer 1" src="https://github.com/user-attachments/assets/efc3584d-b47c-450f-beb1-96cc9979e386" />
 
-## Tools used
-React, React-Router, Material-UI, AWS S3 + Cloudfront
+### Map View
 
+<img width="500" alt="Kombat Explorer 2" src="https://github.com/user-attachments/assets/aa01f5cf-5626-455c-bf84-25c31124fb7c" />
 
-## Notes
+### Event Details
 
-This project is a warehouse for front-end tricks and patterns I commonly use:
+<img width="500" alt="Kombat Explorer 3" src="https://github.com/user-attachments/assets/4b662810-0f14-473e-ade0-bcc857a8f449" />
 
- - Fetching api data & managing state with React Hooks 
- - Handle theme switching / dark mode with `UseContext()`. And put the user's preference in LocalStorage
- - Loading spinners & conditional rendering
- - Searchbar list filtering
- - A toggle feature to view raw json on the ui:
-  <img width="400" alt="Screen Shot 2023-05-10 at 1 06 20 PM" src="https://github.com/WillRussell/kombat-explorer-client/assets/8751625/e9877524-8c10-4782-8a91-0fa1d7f3cf1c">
+## Features
 
+- Browse upcoming boxing and MMA events with dates, venues, and locations
+- Search the event calendar by event data
+- Explore geocoded events on an interactive Leaflet map
+- View announced fight cards, fighter records, and lineup status
+- Switch between formatted content and the underlying JSON data
+- Light/dark theme switching with the preference saved in local storage
+- Navigate responsive loading, error, and empty states
 
-## Running the app locally + available scripts
+## Tech stack
 
- `yarn start`
- 
-`yarn test`
-  
-`yarn build`
-  
-`yarn deploy`
-  
-`yarn lint --fix`
+- React 16 and Create React App
+- React Router 5
+- Material-UI 4
+- Leaflet and React Leaflet
+- Axios
+- Sass
+- Moment.js and Lodash
+- AWS S3 and CloudFront
 
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `yarn start` | Run the app in development mode |
+| `yarn test` | Run the test suite in watch mode |
+| `yarn build` | Create an optimized production build |
+| `yarn lint` | Check JavaScript and JSX with ESLint |
+| `yarn lint --fix` | Fix automatically repairable lint issues |
+| `yarn deploy` | Sync the existing `build/` directory to the configured S3 bucket |
+
+## Routes
+
+| Route | Description |
+| --- | --- |
+| `/` | Searchable upcoming-event calendar |
+| `/map` | Interactive map of event locations |
+| `/fights/:id` | Fight-card details for an event |
+
+## Deployment
+
+The production build is hosted with AWS S3 and CloudFront. The deploy script expects an authenticated AWS CLI and an existing production build:
+
+```bash
+yarn build
+yarn deploy
+```
